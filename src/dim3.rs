@@ -37,7 +37,7 @@ fn count_diagonals(x: usize, y: usize, z: usize) -> usize {
 }
 #[allow(non_snake_case)]
 fn max_diagonal_len(X: usize, Y: usize, Z: usize) -> usize {
-    // FIXME: There might be a cheaper calculation.
+    // TODO: There might be a cheaper calculation.
     // 1,1,1 => 1
     // 1,1,2 => 1
     // 1,2,2 => 2
