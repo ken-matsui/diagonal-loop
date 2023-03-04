@@ -12,7 +12,7 @@ pub(crate) fn diag_loop(X: usize, Y: usize) {
 
     println!();
 
-    println!("diagonals: {}", count_diagonals(X, Y));
+    println!("num of diagonals: {}", count_diagonals(X, Y));
     println!("max diagonal len (middle): {}", max_diagonal_len(X, Y));
     println!("ave diagonal len: {:.2}", ave_diagonal_len(X, Y));
 

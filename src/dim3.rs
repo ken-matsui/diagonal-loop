@@ -14,7 +14,8 @@ pub(crate) fn diag_loop(X: usize, Y: usize, Z: usize) {
         println!();
     }
 
-    println!("{} diagonals:", count_diagonals(X, Y, Z));
+    println!("num of diagonals: {}", count_diagonals(X, Y, Z));
+    println!("max diagonal len (middle): {}", max_diagonal_len(X, Y, Z));
     println!("ave diagonal len: {:.2}", ave_diagonal_len(X, Y, Z));
 
     for offset in 0..=(X + Y + Z - 3) {
@@ -33,6 +34,55 @@ pub(crate) fn diag_loop(X: usize, Y: usize, Z: usize) {
 #[inline]
 fn count_diagonals(x: usize, y: usize, z: usize) -> usize {
     (x + y + z) - 2
+}
+#[allow(non_snake_case)]
+fn max_diagonal_len(X: usize, Y: usize, Z: usize) -> usize {
+    // FIXME: There might be a cheaper calculation.
+    // 1,1,1 => 1
+    // 1,1,2 => 1
+    // 1,2,2 => 2
+    // 2,2,2 => 3
+    // 2,2,3 => 4
+    // 2,3,3 => 5
+    // 3,3,3 => 7
+    // 3,3,4 => 8
+    // 3,4,4 => 10
+    // 4,4,4 => 12
+    // 4,4,5 => 14
+    // 4,5,5 => 16
+    // 5,5,5 => 19
+    // 5,5,6 => 21
+    // 5,6,6 => 24
+    // 6,6,6 => 27
+    // 6,6,7 => 30
+    // 6,7,7 => 33
+    // 7,7,7 => 37
+    // 7,7,8 => 40
+    // 7,8,8 => 44
+    // 8,8,8 => 48
+    // 8,8,9 => 52
+    // 8,9,9 => 56
+    // 9,9,9 => 61
+    // 9,9,10 => 65
+    // 9,10,10 => 70
+    // 10,10,10 => 75
+    let mut max_count = 0;
+    for offset in 0..=(X + Y + Z - 3) {
+        let mut count = 0;
+        for z in 0..=offset {
+            for y in 0..=(offset - z) {
+                let x = (offset - z) - y;
+                if x < X && y < Y && z < Z {
+                    count += 1;
+                }
+            }
+        }
+
+        if max_count < count {
+            max_count = count;
+        }
+    }
+    max_count
 }
 #[inline]
 fn ave_diagonal_len(x: usize, y: usize, z: usize) -> f32 {
