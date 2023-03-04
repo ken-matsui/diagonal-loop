@@ -1,5 +1,7 @@
 # diagonal-loop
 
+Example code of diagonal loops for 2 & 3-dimensional arrays
+
 ## Usage
 
 ```console
