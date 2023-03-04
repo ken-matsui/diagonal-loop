@@ -3,7 +3,7 @@
 ## Usage
 
 ```console
-./target/debug/diagonal-loop --help
+$ ./target/debug/diagonal-loop --help
 Usage: diagonal-loop <X> <Y> [Z]
 
 Arguments:
