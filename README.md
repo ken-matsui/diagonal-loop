@@ -3,7 +3,7 @@
 ## Usage
 
 ```console
-$ ./target/debug/diagonal-loop --help
+$ cargo run -- --help
 Usage: diagonal-loop <X> <Y> [Z]
 
 Arguments:
@@ -21,7 +21,7 @@ Options:
 ### 2-dimensional array
 
 ```console
-$ ./target/release/diagonal-loop 3 4
+$ cargo run -- 3 4
 === two_dimensional_diagonal_loop ===
 
 |(0,0)|(0,1)|(0,2)|(0,3)|
@@ -41,7 +41,7 @@ $ ./target/release/diagonal-loop 3 4
 ### 3-dimensional array
 
 ```console
-$ ./target/debug/diagonal-loop 3 3 3
+$ cargo run -- 3 3 3
 === three_dimensional_diagonal_loop ===
 
 z = 0
