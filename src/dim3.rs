@@ -1,7 +1,20 @@
+use crate::util::println_header;
+use crate::Opts;
+
 use colored::Colorize;
 
 #[allow(non_snake_case)]
-pub(crate) fn diag_loop(X: usize, Y: usize, Z: usize) {
+pub(crate) fn diag_loop(opts: Opts, X: usize, Y: usize, Z: usize) {
+    if !opts.no_elem {
+        show_elements(X, Y, Z);
+    }
+    if opts.report {
+        report_diag(X, Y, Z);
+    }
+}
+
+#[allow(non_snake_case)]
+fn show_elements(X: usize, Y: usize, Z: usize) {
     #[allow(clippy::needless_range_loop)]
     for z in 0..Z {
         println!("z = {z}");
@@ -14,10 +27,6 @@ pub(crate) fn diag_loop(X: usize, Y: usize, Z: usize) {
         println!();
     }
 
-    println!("num of diagonals: {}", count_diagonals(X, Y, Z));
-    println!("max diagonal len (middle): {}", max_diagonal_len(X, Y, Z));
-    println!("ave diagonal len: {:.2}", ave_diagonal_len(X, Y, Z));
-
     for offset in 0..=(X + Y + Z - 3) {
         for z in 0..=offset {
             for y in 0..=(offset - z) {
@@ -29,6 +38,17 @@ pub(crate) fn diag_loop(X: usize, Y: usize, Z: usize) {
         }
         println!("|");
     }
+
+    println!();
+}
+
+#[inline]
+fn report_diag(x: usize, y: usize, z: usize) {
+    println_header("Report");
+    println!("num of diagonals: {}", count_diagonals(x, y, z));
+    println!("max diagonal len (middle): {}", max_diagonal_len(x, y, z));
+    println!("ave diagonal len: {:.2}", ave_diagonal_len(x, y, z));
+    println!();
 }
 
 #[inline]
