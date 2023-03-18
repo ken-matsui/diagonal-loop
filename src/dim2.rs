@@ -25,6 +25,7 @@ fn show_elements(X: usize, Y: usize, opts: Opts) {
             top_down_diag_loop(X, Y);
         }
     } else {
+        #[allow(clippy::collapsible-else-if)]
         if let Some(block) = opts.block {
             bottom_up_blocked_diag_loop(X, Y, block);
         } else {
