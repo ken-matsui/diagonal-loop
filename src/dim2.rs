@@ -6,7 +6,7 @@ use colored::Colorize;
 #[allow(non_snake_case)]
 pub(crate) fn diag_loop(opts: Opts, X: usize, Y: usize) {
     if !opts.no_elem {
-        show_elements(X, Y);
+        show_elements(X, Y, opts.bottom_up);
     }
     if opts.report {
         report_diag(X, Y);
@@ -14,7 +14,20 @@ pub(crate) fn diag_loop(opts: Opts, X: usize, Y: usize) {
 }
 
 #[allow(non_snake_case)]
-fn show_elements(X: usize, Y: usize) {
+fn show_elements(X: usize, Y: usize, bottom_up: bool) {
+    simple_loop(X, Y);
+    println!();
+
+    if bottom_up {
+        top_down_diag(X, Y);
+    } else {
+        bottom_up_diag(X, Y);
+    }
+    println!();
+}
+
+#[allow(non_snake_case)]
+fn simple_loop(X: usize, Y: usize) {
     #[allow(clippy::needless_range_loop)]
     for x in 0..X {
         for y in 0..Y {
@@ -22,9 +35,25 @@ fn show_elements(X: usize, Y: usize) {
         }
         println!("|");
     }
+}
 
-    println!();
+#[allow(non_snake_case)]
+fn top_down_diag(X: usize, Y: usize) {
+    println!("top-down:");
+    for offset in 0..=(X + Y - 2) {
+        for x in 0..=offset {
+            let y = offset - x;
+            if x < X && y < Y {
+                print!("|{}", format!("({x},{y})").cyan());
+            }
+        }
+        println!("|");
+    }
+}
 
+#[allow(non_snake_case)]
+fn bottom_up_diag(X: usize, Y: usize) {
+    println!("bottom-up:");
     for offset in 0..=(X + Y - 2) {
         for y in 0..=offset {
             let x = offset - y;
@@ -34,8 +63,6 @@ fn show_elements(X: usize, Y: usize) {
         }
         println!("|");
     }
-
-    println!();
 }
 
 #[inline]

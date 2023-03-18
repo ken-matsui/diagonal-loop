@@ -24,11 +24,16 @@ struct Cli {
     /// Do not show elements
     #[clap(long)]
     no_elem: bool,
+
+    /// Loop diagonals bottom-up (default: top-down)
+    #[clap(long)]
+    bottom_up: bool,
 }
 
 pub(crate) struct Opts {
     report: bool,
     no_elem: bool,
+    bottom_up: bool,
 }
 
 impl From<&Cli> for Opts {
@@ -36,6 +41,7 @@ impl From<&Cli> for Opts {
         Self {
             report: value.report,
             no_elem: value.no_elem,
+            bottom_up: value.bottom_up,
         }
     }
 }
