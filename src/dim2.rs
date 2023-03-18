@@ -19,9 +19,9 @@ fn show_elements(X: usize, Y: usize, bottom_up: bool) {
     println!();
 
     if bottom_up {
-        top_down_diag(X, Y);
-    } else {
         bottom_up_diag(X, Y);
+    } else {
+        top_down_diag(X, Y);
     }
     println!();
 }
