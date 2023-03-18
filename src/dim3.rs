@@ -3,10 +3,11 @@ use crate::Opts;
 
 use colored::Colorize;
 
+// TODO: support block
 #[allow(non_snake_case)]
 pub(crate) fn diag_loop(opts: Opts, X: usize, Y: usize, Z: usize) {
     if !opts.no_elem {
-        show_elements(X, Y, Z, opts.bottom_up);
+        show_elements(X, Y, Z, opts);
     }
     if opts.report {
         report_diag(X, Y, Z);
@@ -14,13 +15,13 @@ pub(crate) fn diag_loop(opts: Opts, X: usize, Y: usize, Z: usize) {
 }
 
 #[allow(non_snake_case)]
-fn show_elements(X: usize, Y: usize, Z: usize, bottom_up: bool) {
+fn show_elements(X: usize, Y: usize, Z: usize, opts: Opts) {
     simple_loop(X, Y, Z);
 
-    if bottom_up {
-        bottom_up_diag(X, Y, Z);
+    if !opts.bottom_up {
+        top_down_diag_loop(X, Y, Z);
     } else {
-        top_down_diag(X, Y, Z);
+        bottom_up_diag_loop(X, Y, Z);
     }
     println!();
 }
@@ -41,7 +42,7 @@ fn simple_loop(X: usize, Y: usize, Z: usize) {
 }
 
 #[allow(non_snake_case)]
-fn top_down_diag(X: usize, Y: usize, Z: usize) {
+fn top_down_diag_loop(X: usize, Y: usize, Z: usize) {
     println!("top-down:");
     for offset in 0..=(X + Y + Z - 3) {
         for x in 0..=offset {
@@ -57,7 +58,7 @@ fn top_down_diag(X: usize, Y: usize, Z: usize) {
 }
 
 #[allow(non_snake_case)]
-fn bottom_up_diag(X: usize, Y: usize, Z: usize) {
+fn bottom_up_diag_loop(X: usize, Y: usize, Z: usize) {
     println!("bottom-up:");
     for offset in 0..=(X + Y + Z - 3) {
         for z in 0..=offset {

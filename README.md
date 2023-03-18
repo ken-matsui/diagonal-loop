@@ -16,11 +16,12 @@ Arguments:
   [Z]  the length of z-axis (for a 3-dim array)
 
 Options:
-  -r, --report     Show general information about diagonals
-      --no-elem    Do not show elements
-      --bottom-up  Loop diagonals bottom-up (default: top-down)
-  -h, --help       Print help
-  -V, --version    Print version
+  -r, --report         Show general information about diagonals
+      --no-elem        Do not show elements
+      --bottom-up      Loop diagonals bottom-up (default: top-down)
+      --block <BLOCK>  Split by blocks (BLOCK*BLOCK)
+  -h, --help           Print help
+  -V, --version        Print version
 ```
 
 ## Examples
@@ -65,6 +66,26 @@ bottom-up:
 |(2,1)|(1,2)|(0,3)|
 |(2,2)|(1,3)|
 |(2,3)|
+
+=== two_dimensional_diagonal_loop ===
+```
+
+#### Use blocks
+
+```console
+$ cargo run -- 4 4 --block 2
+=== two_dimensional_diagonal_loop ===
+
+|(0,0)|(0,1)|(0,2)|(0,3)|
+|(1,0)|(1,1)|(1,2)|(1,3)|
+|(2,0)|(2,1)|(2,2)|(2,3)|
+|(3,0)|(3,1)|(3,2)|(3,3)|
+
+top-down:
+|(0,0)..=(1,1)|
+|(0,2)..=(1,3)|(2,0)..=(3,1)|
+|(2,2)..=(3,3)|
+|
 
 === two_dimensional_diagonal_loop ===
 ```
